@@ -1,5 +1,5 @@
 .letter {
-    width: 40px;
+    width: 30px;
     border: 0;
     border-bottom: 1px black solid;
     margin-right: 1%;
@@ -8,7 +8,7 @@
 }
 
 table{
-    width: 15%;
+    width: 70%;
 }
 
 td{
@@ -23,4 +23,35 @@ td{
 .selected-letter {
     background: #C1C1C1;
     color: #5E5E5E;
+}
+
+.game-container{
+    float: left;
+    width: 40%;
+}
+
+.letter-container {
+    float: left;
+    width: 20%;
+    padding-left: 5%;
+}
+
+.start-game{
+    background: #FFBB00;
+    color: black;
+    font-weight: 700;
+    border: none;
+    padding: 2%;
+    width: 20%;
+    border-radius: 5px;
+}
+
+.draw-game{
+    float: right;
+    width: 30%;
+    padding-right: 10%;
+}
+
+.draw-img {
+    width: 100%;
 }

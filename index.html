@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,9 @@
     <script src="scripts/main.js" async></script>
     <link rel="stylesheet" href="styles/style.css">
 </head>
-<body>
-    <button onclick="startGame()">Iniciar</button>
-    <p>Errores: 0</p>
-    <div id="word-container" class="word-container">
 
-    </div>
-    <div>
+<body>
+    <div class="letter-container">
         <table>
             <tr>
                 <td>A</td>
@@ -63,5 +60,15 @@
 
         </table>
     </div>
+    <div class="game-container">
+        <button class="start-game">Iniciar</button>
+        <p>Errores: 0</p>
+        <div id="word-container" class="word-container">
+        </div>
+    </div>
+    <div class="draw-game">
+        <img src="images/init.jpg" alt="" class="draw-img">
+    </div>
 </body>
+
 </html>
