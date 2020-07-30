@@ -1,5 +1,5 @@
 //var wordList = ['dinosaurio'];
-var wordList = ['dinosaurio', 'apartamento', 'telefono', 'calendario', 'discoteca'];
+var wordList = ['dinosaurio', 'apartamento', 'telefono', 'calendario', 'discoteca', 'cuadrado', 'residencia', 'humectar', 'cuaderno', 'libreria', 'recipiente', 'concreto', 'pegamento', 'comunicar', 'principal', 'secundario', 'galleta', 'servilleta', 'guitarra', 'felino', 'sentimiento', 'construir'];
 var keyCodeList = [];
 var randomNumber = 0;
 var randomWord = '';
@@ -8,15 +8,16 @@ var wrongCounter = 0;
 var startGameButton = document.querySelector('.start-game');
 const wrongContainer = document.querySelectorAll('p');
 const cells = document.querySelectorAll('td');
+const img = document.querySelector('img');
 
 startGameButton.addEventListener('click', startGame);
-window.addEventListener('keyup', keyUpLetter);
 
 function startGame() {
     randomNumber = Math.floor(Math.random() * wordList.length);
     randomWord = wordList[randomNumber];
     let wordContainer = document.getElementById('word-container');
     const letterContainer = document.querySelectorAll('input');
+    img.src = 'images/init2.jpg'
 
     for (let i = 0; i < cells.length; i++) {
         cells[i].addEventListener('click', clickLetter);
@@ -36,6 +37,7 @@ function startGame() {
     }
     console.log(randomWord);
     wordList.splice(randomNumber, 1);
+    window.addEventListener('keyup', keyUpLetter);
     startGameButton.innerHTML = 'Reiniciar';
     startGameButton.removeEventListener('click', startGame);
     startGameButton.addEventListener('click', restartGame);
@@ -46,7 +48,7 @@ function restartGame() {
     wrongCounter = 0;
     rigthCounterInit = 0;
     wrongCounter = 0;
-    wordList = ['dinosaurio', 'apartamento', 'telefono', 'calendario', 'discoteca'];
+    wordList = ['dinosaurio', 'apartamento', 'telefono', 'calendario', 'discoteca', 'cuadrado', 'residencia', 'humectar', 'cuaderno', 'libreria', 'recipiente', 'concreto', 'pegamento', 'comunicar', 'principal', 'secundario', 'galleta', 'servilleta', 'guitarra', 'felino', 'sentimiento', 'construir'];
     keyCodeList = [];
     wrongContainer[0].innerHTML = 'Errores: ' + wrongCounter;
     startGame();
@@ -54,6 +56,11 @@ function restartGame() {
 
 function endGame() {
     alert('Juego terminado!')
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].removeEventListener('click', clickLetter);
+    }
+
+    window.removeEventListener('keyup', keyUpLetter);
 }
 
 function clickLetter() {
@@ -63,12 +70,12 @@ function clickLetter() {
     compareLetter(letter);
 }
 
-function keyUpLetter(e){
+function keyUpLetter(e) {
     for (let i = 0; i < keyCodeList.length; i++) {
-        if(keyCodeList[i] == e.keyCode){
+        if (keyCodeList[i] == e.keyCode) {
             return;
         }
-        
+
     }
 
     if ((e.keyCode > 64 && e.keyCode < 91) || e.keyCode == 192) {
@@ -76,15 +83,15 @@ function keyUpLetter(e){
 
             if (cells[i].innerHTML.toLowerCase() == e.key) {
                 cells[i].removeEventListener('click', clickLetter);
-                cells[i].classList.add("selected-letter"); 
-            }  
+                cells[i].classList.add("selected-letter");
+            }
         }
         keyCodeList.push(e.keyCode)
-        compareLetter(e.key)   
+        compareLetter(e.key)
     }
 }
 
-function compareLetter(letter){
+function compareLetter(letter) {
     var rightSelected = 0;
 
     const letterContainer = document.querySelectorAll('input');
@@ -103,10 +110,37 @@ function compareLetter(letter){
     if (rightSelected == 0) {
         wrongCounter += 1;
         wrongContainer[0].innerHTML = 'Errores: ' + wrongCounter;
+        switch (wrongCounter) {
+            case 1:
+                img.src = 'images/error-1.jpg'
+                break;
+            case 2:
+                img.src = 'images/error-2.jpg'
+                break;
+            case 3:
+                img.src = 'images/error-3.jpg'
+                break;
+            case 4:
+                img.src = 'images/error-4.jpg'
+                break;
+            case 5:
+                img.src = 'images/error-5.jpg'
+                break;
+            case 6:
+                img.src = 'images/error-6.jpg'
+                break;
+            default:
+                break;
+        }
+
+        if (wrongCounter == 6) {
+            endGame();
+        }
+
     } else {
         rigthCounterInit += rightSelected;
     }
-    
+
     if (rigthCounterInit == randomWord.length && wordList.length > 0) {
         rigthCounterInit = 0;
         wrongCounter = 0;
