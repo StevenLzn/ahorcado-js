@@ -9,6 +9,7 @@
 
 table{
     width: 70%;
+    height: 270px;
 }
 
 td{
@@ -26,9 +27,10 @@ td{
 }
 
 .game-container{
+    position: relative;
     float: left;
     width: 40%;
-    height: 180px;
+    height: 270px;
 }
 
 .letter-container {
@@ -37,8 +39,17 @@ td{
     padding-left: 5%;
 }
 
+.message{
+    position: absolute;
+    bottom: 0;
+    border: 2px solid #FFCC3D;
+    padding: 3%;
+    background: #FFD359;
+    border-radius: 2px;
+}
+
 .start-game{
-    background: #FFBB00;
+    background: #FFD359;
     color: black;
     font-weight: 700;
     border: none;
@@ -55,4 +66,5 @@ td{
 
 .draw-img {
     width: 100%;
+    height: 270px;
 }

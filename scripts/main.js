@@ -1,4 +1,3 @@
-//var wordList = ['dinosaurio'];
 var wordList = ['dinosaurio', 'apartamento', 'telefono', 'calendario', 'discoteca', 'cuadrado', 'residencia', 'humectar', 'cuaderno', 'libreria', 'recipiente', 'concreto', 'pegamento', 'comunicar', 'principal', 'secundario', 'galleta', 'servilleta', 'guitarra', 'felino', 'sentimiento', 'construir'];
 var keyCodeList = [];
 var randomNumber = 0;
@@ -9,6 +8,7 @@ var startGameButton = document.querySelector('.start-game');
 const wrongContainer = document.querySelectorAll('p');
 const cells = document.querySelectorAll('td');
 const img = document.querySelector('img');
+const message = document.querySelector('.message')
 
 startGameButton.addEventListener('click', startGame);
 
@@ -35,8 +35,8 @@ function startGame() {
         letter.disabled = true;
         wordContainer.appendChild(letter);
     }
-    console.log(randomWord);
     wordList.splice(randomNumber, 1);
+    message.innerHTML = "Recuerda que tienes un límite de 6 fallos, en cualquier momento puedes reiniciar el juego dando en el botón 'Reiniciar' en la parte superior."
     window.addEventListener('keyup', keyUpLetter);
     startGameButton.innerHTML = 'Reiniciar';
     startGameButton.removeEventListener('click', startGame);
@@ -50,12 +50,17 @@ function restartGame() {
     wrongCounter = 0;
     wordList = ['dinosaurio', 'apartamento', 'telefono', 'calendario', 'discoteca', 'cuadrado', 'residencia', 'humectar', 'cuaderno', 'libreria', 'recipiente', 'concreto', 'pegamento', 'comunicar', 'principal', 'secundario', 'galleta', 'servilleta', 'guitarra', 'felino', 'sentimiento', 'construir'];
     keyCodeList = [];
-    wrongContainer[0].innerHTML = 'Errores: ' + wrongCounter;
+    wrongContainer[0].innerHTML = 'Fallos: ' + wrongCounter;
     startGame();
 }
 
-function endGame() {
-    alert('Juego terminado!')
+function endGame(end) {
+    if (end == 1) {
+        message.innerHTML = "Felicidades! completaste todas las palabras del juego, puedes volver a jugar dando en el botón 'Reiniciar' en la parte superior."
+    }else if(end == 2){
+        message.innerHTML = "Agotaste el límite de fallos! puedes volver a jugar dando en el botón 'Reiniciar' en la parte superior."
+    }
+
     for (let i = 0; i < cells.length; i++) {
         cells[i].removeEventListener('click', clickLetter);
     }
@@ -109,7 +114,7 @@ function compareLetter(letter) {
 
     if (rightSelected == 0) {
         wrongCounter += 1;
-        wrongContainer[0].innerHTML = 'Errores: ' + wrongCounter;
+        wrongContainer[0].innerHTML = 'Fallos: ' + wrongCounter;
         switch (wrongCounter) {
             case 1:
                 img.src = 'images/error-1.jpg'
@@ -134,7 +139,7 @@ function compareLetter(letter) {
         }
 
         if (wrongCounter == 6) {
-            endGame();
+            endGame(2);
         }
 
     } else {
@@ -144,10 +149,10 @@ function compareLetter(letter) {
     if (rigthCounterInit == randomWord.length && wordList.length > 0) {
         rigthCounterInit = 0;
         wrongCounter = 0;
-        wrongContainer[0].innerHTML = 'Errores: ' + wrongCounter;
+        wrongContainer[0].innerHTML = 'Fallos: ' + wrongCounter;
         keyCodeList = [];
         startGame();
     } else if (rigthCounterInit == randomWord.length && wordList.length == 0) {
-        endGame();
+        endGame(1);
     }
 }
